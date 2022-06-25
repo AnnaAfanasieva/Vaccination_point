@@ -17,7 +17,7 @@ public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
