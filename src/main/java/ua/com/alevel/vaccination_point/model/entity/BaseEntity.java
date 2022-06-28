@@ -11,9 +11,7 @@ import java.util.Date;
 @Setter
 @ToString
 @MappedSuperclass
-public class BaseEntity {
-
-    //TODO abstract or not?
+public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
