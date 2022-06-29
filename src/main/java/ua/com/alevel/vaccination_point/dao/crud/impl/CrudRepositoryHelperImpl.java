@@ -31,7 +31,9 @@ public class CrudRepositoryHelperImpl<
     @Override
     public void delete(R repository, Long id) {
         checkExist(repository, id);
-        repository.deleteById(id);
+        E entity = repository.getById(id);
+        entity.setVisible(false);
+        repository.save(entity);
     }
 
     @Override
