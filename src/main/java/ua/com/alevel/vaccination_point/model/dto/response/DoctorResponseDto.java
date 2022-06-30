@@ -11,14 +11,13 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 public class DoctorResponseDto extends ResponseDto {
 
     private String surname;
     private String name;
     private String patronymic;
-    private VaccinationPoint vaccinationPoint;
-    private Set<Note> notes;
+    private Long vaccinationPointId;
+//    private Set<Note> notes;
 
     public DoctorResponseDto() {
 
@@ -32,7 +31,7 @@ public class DoctorResponseDto extends ResponseDto {
         this.surname = doctor.getSurname();
         this.name = doctor.getName();
         this.patronymic = doctor.getPatronymic();
-        this.vaccinationPoint = doctor.getVaccinationPoint();
-        this.notes = doctor.getNotes();
+        this.vaccinationPointId = doctor.getVaccinationPoint().getId();
+//        this.notes = doctor.getNotes();
     }
 }

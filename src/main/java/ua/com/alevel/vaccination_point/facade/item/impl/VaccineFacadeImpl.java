@@ -56,6 +56,6 @@ public class VaccineFacadeImpl implements VaccineFacade {
         for (Vaccine vaccine : vaccineService.findAll()) {
             dtoList.add(new VaccineResponseDto(vaccine));
         }
-        return null;
+        return dtoList;
     }
 }

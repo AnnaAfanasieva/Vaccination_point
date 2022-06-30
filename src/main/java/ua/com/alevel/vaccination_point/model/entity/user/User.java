@@ -16,6 +16,15 @@ import javax.persistence.Enumerated;
 @Entity
 public class User extends BaseEntity {
 
+    @Column(nullable = false)
+    private String surname;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String patronymic;
+
     @Column(nullable = false, unique = true)
     private String email;
 

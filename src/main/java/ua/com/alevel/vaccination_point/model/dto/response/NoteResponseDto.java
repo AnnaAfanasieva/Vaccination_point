@@ -11,7 +11,6 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ToString
 public class NoteResponseDto extends ResponseDto {
 
     private String surname;
@@ -19,9 +18,9 @@ public class NoteResponseDto extends ResponseDto {
     private String patronymic;
     private String phone;
     private Date dateOfBirth;
-    private Vaccine vaccine;
+    private Long vaccineId;
     private Date vaccineDate;
-    private Doctor doctor;
+    private Long doctorId;
 
     public NoteResponseDto() {
 
@@ -37,8 +36,8 @@ public class NoteResponseDto extends ResponseDto {
         this.patronymic = note.getPatronymic();
         this.phone = note.getPhone();
         this.dateOfBirth = note.getDateOfBirth();
-        this.vaccine = note.getVaccine();
+        this.vaccineId = note.getVaccine().getId();
         this.vaccineDate = note.getVaccineDate();
-        this.doctor = note.getDoctor();
+        this.doctorId = note.getDoctor().getId();
     }
 }

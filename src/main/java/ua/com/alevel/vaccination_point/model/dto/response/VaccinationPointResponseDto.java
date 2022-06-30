@@ -10,11 +10,10 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 public class VaccinationPointResponseDto extends ResponseDto {
 
     private String address;
-    private Set<Doctor> doctors;
+//    private Set<Doctor> doctors;
 
     public VaccinationPointResponseDto() {
 
@@ -26,6 +25,6 @@ public class VaccinationPointResponseDto extends ResponseDto {
         setUpdated(vaccinationPoint.getUpdated());
         setVisible(vaccinationPoint.isVisible());
         this.address = vaccinationPoint.getAddress();
-        this.doctors = vaccinationPoint.getDoctors();
+//        this.doctors = vaccinationPoint.getDoctors();
     }
 }

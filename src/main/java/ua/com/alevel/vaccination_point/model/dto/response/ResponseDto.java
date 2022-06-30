@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ToString
 public abstract class ResponseDto {
 
     private Long id;

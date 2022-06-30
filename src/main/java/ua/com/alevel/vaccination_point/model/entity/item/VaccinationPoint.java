@@ -15,7 +15,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "vaccination_points")
 public class VaccinationPoint extends BaseEntity {

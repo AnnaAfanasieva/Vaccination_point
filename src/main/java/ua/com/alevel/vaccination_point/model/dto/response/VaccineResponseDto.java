@@ -7,7 +7,6 @@ import ua.com.alevel.vaccination_point.model.entity.item.Vaccine;
 
 @Getter
 @Setter
-@ToString
 public class VaccineResponseDto extends ResponseDto {
 
     private String name;

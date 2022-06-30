@@ -53,7 +53,8 @@ public class VaccinationPointFacadeImpl implements VaccinationPointFacade {
     public List<VaccinationPointResponseDto> findAll() {
         //TODO переробити з використанням stream api
         List<VaccinationPointResponseDto> dtoList = new ArrayList<>();
-        for (VaccinationPoint vaccinationPoint : vaccinationPointService.findAll()) {
+        List<VaccinationPoint> vaccinationPoints = vaccinationPointService.findAll();
+        for (VaccinationPoint vaccinationPoint : vaccinationPoints) {
             dtoList.add(new VaccinationPointResponseDto(vaccinationPoint));
         }
         return dtoList;

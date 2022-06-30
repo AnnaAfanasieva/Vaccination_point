@@ -12,14 +12,9 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @DiscriminatorValue("DOCTOR")
 public class Doctor extends User {
-
-    private String surname;
-    private String name;
-    private String patronymic;
 
     @ManyToOne()
     private VaccinationPoint vaccinationPoint;
