@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import ua.com.alevel.vaccination_point.model.entity.item.VaccinationPoint;
+import ua.com.alevel.vaccination_point.model.util.RoleType;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -21,5 +22,6 @@ public class PointAdmin extends User {
 
     public PointAdmin() {
         super();
+        setRoleType(RoleType.ROLE_POINT_ADMIN);
     }
 }

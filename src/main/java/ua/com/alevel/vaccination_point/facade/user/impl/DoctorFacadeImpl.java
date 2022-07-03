@@ -5,6 +5,7 @@ import ua.com.alevel.vaccination_point.facade.user.DoctorFacade;
 import ua.com.alevel.vaccination_point.facade.util.ConvertRequestDtoToEntity;
 import ua.com.alevel.vaccination_point.model.dto.request.DoctorRequestDto;
 import ua.com.alevel.vaccination_point.model.dto.response.DoctorResponseDto;
+import ua.com.alevel.vaccination_point.model.entity.item.VaccinationPoint;
 import ua.com.alevel.vaccination_point.model.entity.user.Doctor;
 import ua.com.alevel.vaccination_point.service.user.DoctorService;
 
@@ -54,6 +55,30 @@ public class DoctorFacadeImpl implements DoctorFacade {
         //TODO переробити з використанням stream api
         List<DoctorResponseDto> dtoList = new ArrayList<>();
         for (Doctor doctor : doctorService.findAll()) {
+            dtoList.add(new DoctorResponseDto(doctor));
+        }
+        return dtoList;
+    }
+
+    @Override
+    public List<DoctorResponseDto> findAllByVaccinationPoint(VaccinationPoint vaccinationPoint) {
+        List<DoctorResponseDto> dtoList = new ArrayList<>();
+        for (Doctor doctor : doctorService.findAllByVaccinationPoint(vaccinationPoint)) {
+            dtoList.add(new DoctorResponseDto(doctor));
+        }
+        return dtoList;
+    }
+
+    @Override
+    public DoctorResponseDto findByIdAndVisible(Long id, boolean isVisible) {
+        return new DoctorResponseDto(doctorService.findByIdAndVisible(id, isVisible).get());
+    }
+
+    @Override
+    public List<DoctorResponseDto> findAllByVisible(boolean isVisible) {
+        //TODO переробити з використанням stream api
+        List<DoctorResponseDto> dtoList = new ArrayList<>();
+        for (Doctor doctor : doctorService.findAllByVisible(isVisible)) {
             dtoList.add(new DoctorResponseDto(doctor));
         }
         return dtoList;

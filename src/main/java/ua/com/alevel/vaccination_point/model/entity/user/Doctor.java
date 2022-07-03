@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import ua.com.alevel.vaccination_point.model.entity.item.Note;
 import ua.com.alevel.vaccination_point.model.entity.item.VaccinationPoint;
+import ua.com.alevel.vaccination_point.model.util.RoleType;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,6 +26,7 @@ public class Doctor extends User {
 
     public Doctor() {
         super();
+        setRoleType(RoleType.ROLE_DOCTOR);
         this.notes = new HashSet<>();
     }
 }

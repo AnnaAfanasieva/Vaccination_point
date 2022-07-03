@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import ua.com.alevel.vaccination_point.model.entity.BaseEntity;
+import ua.com.alevel.vaccination_point.model.util.RoleType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,10 +34,9 @@ public class User extends BaseEntity {
 
     private Boolean enabled;
 
-    //TODO roleType need or not?
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "role_type", nullable = false)
-//    private RoleType roleType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_type", nullable = false)
+    private RoleType roleType;
 
     public User() {
         super();

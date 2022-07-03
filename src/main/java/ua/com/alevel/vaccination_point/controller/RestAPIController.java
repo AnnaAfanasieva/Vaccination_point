@@ -6,6 +6,8 @@ import ua.com.alevel.vaccination_point.facade.item.NoteFacade;
 import ua.com.alevel.vaccination_point.facade.item.VaccinationPointFacade;
 import ua.com.alevel.vaccination_point.facade.item.VaccineFacade;
 import ua.com.alevel.vaccination_point.facade.user.DoctorFacade;
+import ua.com.alevel.vaccination_point.model.dto.response.VaccineResponseDto;
+import ua.com.alevel.vaccination_point.model.entity.item.Vaccine;
 
 @RestController
 @RequestMapping("/api")
@@ -15,7 +17,7 @@ public class RestAPIController {
     private final VaccinationPointFacade vaccinationPointFacade;
     private final VaccineFacade vaccineFacade;
     private final DoctorFacade doctorFacade;
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     public RestAPIController(NoteFacade noteFacade,
                              VaccinationPointFacade vaccinationPointFacade,
@@ -47,8 +49,30 @@ public class RestAPIController {
         return gson.toJson(doctorFacade.findAll());
     }
 
-    @DeleteMapping("/delete/note")
-    public void deleteNote(@RequestParam(value = "id") Long noteId) {
-        noteFacade.delete(noteId);
+    @GetMapping("/delete/note/{id}")
+    public void deleteNote(@PathVariable("id") Long id) {
+        noteFacade.delete(id);
+    }
+
+    @GetMapping("/delete/vaccinationPoint/{id}")
+    public void deleteVaccinationPoint (@PathVariable("id") Long id) {
+        vaccinationPointFacade.delete(id);
+    }
+
+    @GetMapping("/delete/vaccine/{id}")
+    public void deleteVaccine (@PathVariable("id") Long id) {
+        vaccineFacade.delete(id);
+    }
+
+    @GetMapping("/delete/doctor/{id}")
+    public void deleteDoctor(@PathVariable("id") Long id) {
+        doctorFacade.delete(id);
+    }
+
+    @GetMapping("/notes/vaccine/{id}")
+    public String findAllNotesByVaccine(@PathVariable("id") Long id) {
+        VaccineResponseDto vaccineDto = vaccineFacade.findById(id);
+        Vaccine vaccine = new Vaccine(vaccineDto);
+        return gson.toJson(noteFacade.findAllByVaccine(vaccine));
     }
 }

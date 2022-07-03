@@ -18,50 +18,50 @@ insert into vaccination_points values (default, CURRENT_TIMESTAMP(), 1, CURRENT_
 
 -- Users
 
-insert into user values ('MAIN_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'main.admin@gmail.com', 1, 'main.admin@gmail.com', 'Микола', 'Васильович', 'Малиновський', null);
+insert into user values ('MAIN_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'main.admin@gmail.com', 1, 'Микола', 'main.admin@gmail.com', 'Васильович', 'ROLE_MAIN_ADMIN', 'Малиновський', null);
 
-insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point1.admin@gmail.com', 1, 'point1.admin@gmail.com', 'Анатолій', 'Сергійович', 'Хмельник', 1);
-insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point2.admin@gmail.com', 1, 'point2.admin@gmail.com', 'Микита', 'Іванович', 'Озеров', 2);
-insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point3.admin@gmail.com', 1, 'point3.admin@gmail.com', 'Ірина', 'Максимівна', 'Покровська', 3);
-insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point4.admin@gmail.com', 1, 'point4.admin@gmail.com', 'Андрій', 'Віталійович', 'Огинський', 4);
-insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point5.admin@gmail.com', 1, 'point5.admin@gmail.com', 'Олексій', 'Андрійович', 'Олейник', 5);
-insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point6.admin@gmail.com', 1, 'point6.admin@gmail.com', 'Марина', 'Олександрівна', 'Шахова', 6);
-insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point7.admin@gmail.com', 1, 'point7.admin@gmail.com', 'Віталій', 'Олексійович', 'Островський', 7);
-insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point8.admin@gmail.com', 1, 'point8.admin@gmail.com', 'Аліна', 'Михайлівна', 'Таліян', 8);
+insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point1.admin@gmail.com', 1, 'Анатолій', 'point1.admin@gmail.com', 'Сергійович', 'ROLE_POINT_ADMIN', 'Хмельник', 1);
+insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point2.admin@gmail.com', 1, 'Микита', 'point2.admin@gmail.com', 'Іванович', 'ROLE_POINT_ADMIN', 'Озеров', 2);
+insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point3.admin@gmail.com', 1, 'Ірина', 'point3.admin@gmail.com', 'Максимівна', 'ROLE_POINT_ADMIN', 'Покровська', 3);
+insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point4.admin@gmail.com', 1, 'Андрій', 'point4.admin@gmail.com', 'Віталійович', 'ROLE_POINT_ADMIN', 'Огинський', 4);
+insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point5.admin@gmail.com', 1, 'Олексій', 'point5.admin@gmail.com', 'Андрійович', 'ROLE_POINT_ADMIN', 'Олейник', 5);
+insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point6.admin@gmail.com', 1, 'Марина', 'point6.admin@gmail.com', 'Олександрівна', 'ROLE_POINT_ADMIN', 'Шахова', 6);
+insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point7.admin@gmail.com', 1, 'Віталій', 'point7.admin@gmail.com', 'Олексійович', 'ROLE_POINT_ADMIN', 'Островський', 7);
+insert into user values ('POINT_ADMIN', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'point8.admin@gmail.com', 1, 'Аліна', 'point8.admin@gmail.com', 'Михайлівна', 'ROLE_POINT_ADMIN', 'Таліян', 8);
 
 
 
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'drobenko@gmail.com', 1, 'drobenko@gmail.com', 'Сергій', 'Андрійович', 'Дробинко', 1);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'perelygina@gmail.com', 1, 'perelygina@gmail.com', 'Галина', 'Олександрівна', 'Перелигіна', 1);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'slisarchuk@gmail.com', 1, 'slisarchuk@gmail.com', 'Віктор', 'Васильович', 'Слісарчук', 1);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'drobenko@gmail.com', 1, 'Сергій', 'drobenko@gmail.com', 'Андрійович', 'ROLE_DOCTOR', 'Дробинко', 1);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'perelygina@gmail.com', 1, 'Галина', 'perelygina@gmail.com', 'Олександрівна', 'ROLE_DOCTOR', 'Перелигіна', 1);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'slisarchuk@gmail.com', 1, 'Віктор', 'slisarchuk@gmail.com', 'Васильович', 'ROLE_DOCTOR', 'Слісарчук', 1);
 
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'bacshev@gmail.com', 1, 'bacshev@gmail.com', 'Андрій', 'Олексійович', 'Бакшеєв', 2);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'polishuk@gmail.com', 1, 'polishuk@gmail.com', 'Василь', 'Степанович', 'Поліщук', 2);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'skakun@gmail.com', 1, 'skakun@gmail.com', 'Тетяна', 'Миколаївна', 'Скакун', 2);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'bacshev@gmail.com', 1, 'Андрій', 'bacshev@gmail.com', 'Олексійович', 'ROLE_DOCTOR', 'Бакшеєв', 2);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'polishuk@gmail.com', 1, 'Василь', 'polishuk@gmail.com', 'Степанович', 'ROLE_DOCTOR', 'Поліщук', 2);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'skakun@gmail.com', 1, 'Тетяна', 'skakun@gmail.com', 'Миколаївна', 'ROLE_DOCTOR', 'Скакун', 2);
 
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'labuk@gmail.com', 1, 'labuk@gmail.com', 'Інна', 'Анатоліївна', 'Лабик', 3);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'shelyst@gmail.com', 1, 'shelyst@gmail.com', 'Олена', 'Миколаївна', 'Шелист', 3);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'koval@gmail.com', 1, 'koval@gmail.com', 'Сергій', 'Сергійович', 'Коваль', 3);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'labuk@gmail.com', 1, 'Інна', 'labuk@gmail.com', 'Анатоліївна', 'ROLE_DOCTOR', 'Лабик', 3);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'shelyst@gmail.com', 1, 'Олена', 'shelyst@gmail.com', 'Миколаївна', 'ROLE_DOCTOR', 'Шелист', 3);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'koval@gmail.com', 1, 'Сергій', 'koval@gmail.com', 'Сергійович', 'ROLE_DOCTOR', 'Коваль', 3);
 
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'svinoys@gmail.com', 1, 'svinoys@gmail.com', 'Валентина', 'Романівна', 'Свиноус', 4);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'zabolothya@gmail.com', 1, 'zabolothya@gmail.com', 'Мирослава', 'Миколаївна', 'Заболотня', 4);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'romanuk@gmail.com', 1, 'romanuk@gmail.com', 'Тетяна', 'Володимирівна', 'Романюк', 4);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'svinoys@gmail.com', 1, 'Валентина', 'svinoys@gmail.com', 'Романівна', 'ROLE_DOCTOR', 'Свиноус', 4);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'zabolothya@gmail.com', 1, 'Мирослава', 'zabolothya@gmail.com', 'Миколаївна', 'ROLE_DOCTOR', 'Заболотня', 4);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'romanuk@gmail.com', 1, 'Тетяна', 'romanuk@gmail.com', 'Володимирівна', 'ROLE_DOCTOR', 'Романюк', 4);
 
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'yushkevich@gmail.com', 1, 'yushkevich@gmail.com', 'Наталія', 'Володимирівна', 'Юшкевич', 5);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'sheiko@gmail.com', 1, 'sheiko@gmail.com', 'Майя', 'Миколаївна', 'Шейко', 5);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'fedorchenko@gmail.com', 1, 'fedorchenko@gmail.com', 'Юрій', 'Володимирович', 'Федоренко', 5);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'yushkevich@gmail.com', 1, 'Наталія', 'yushkevich@gmail.com', 'Володимирівна', 'ROLE_DOCTOR', 'Юшкевич', 5);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'sheiko@gmail.com', 1, 'Майя', 'sheiko@gmail.com', 'Миколаївна', 'ROLE_DOCTOR', 'Шейко', 5);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'fedorchenko@gmail.com', 1, 'Юрій', 'fedorchenko@gmail.com', 'Володимирович', 'ROLE_DOCTOR', 'Федоренко', 5);
 
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'lyashko@gmail.com', 1, 'lyashko@gmail.com', 'Валентин', 'Володимирович', 'Ляшко', 6);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'cimoh@gmail.com', 1, 'cimoh@gmail.com', 'Тетяна', 'Іванівна', 'Цімох', 6);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'kulak@gmail.com', 1, 'kulak@gmail.com', 'Людмила', 'Василівна', 'Кулак', 6);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'lyashko@gmail.com', 1, 'Валентин', 'lyashko@gmail.com', 'Володимирович', 'ROLE_DOCTOR', 'Ляшко', 6);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'cimoh@gmail.com', 1, 'Тетяна', 'cimoh@gmail.com', 'Іванівна', 'ROLE_DOCTOR', 'Цімох', 6);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'kulak@gmail.com', 1, 'Людмила', 'kulak@gmail.com', 'Василівна', 'ROLE_DOCTOR', 'Кулак', 6);
 
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'sovtus@gmail.com', 1, 'sovtus@gmail.com', 'Василь', 'Петрович', 'Совтус', 7);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'gramotny@gmail.com', 1, 'gramotny@gmail.com', 'Іван', 'Михайлович', 'Грамотний', 7);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'fedak@gmail.com', 1, 'fedak@gmail.com', 'Оксана', 'Вікторівна', 'Федак', 7);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'sovtus@gmail.com', 1, 'Василь', 'sovtus@gmail.com', 'Петрович', 'ROLE_DOCTOR', 'Совтус', 7);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'gramotny@gmail.com', 1, 'Іван', 'gramotny@gmail.com', 'Михайлович', 'ROLE_DOCTOR', 'Грамотний', 7);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'fedak@gmail.com', 1, 'Оксана', 'fedak@gmail.com', 'Вікторівна', 'ROLE_DOCTOR', 'Федак', 7);
 
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'kocuba@gmail.com', 1, 'kocuba@gmail.com', 'Зоя', 'Володимирівна', 'Коцюба', 8);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'vdovychenko@gmail.com', 1, 'vdovychenko@gmail.com', 'Василь', 'Миколайович', 'Вдовиченко', 8);
-insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'samoylenko@gmail.com', 1, 'samoylenko@gmail.com', 'Людмила', 'Вікторівна', 'Самойленко', 8);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'kocuba@gmail.com', 1, 'Зоя', 'kocuba@gmail.com', 'Володимирівна', 'ROLE_DOCTOR', 'Коцюба', 8);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'vdovychenko@gmail.com', 1, 'Василь', 'vdovychenko@gmail.com', 'Миколайович', 'ROLE_DOCTOR', 'Вдовиченко', 8);
+insert into user values ('DOCTOR', default, CURRENT_TIMESTAMP(), 1, CURRENT_TIMESTAMP(), 'samoylenko@gmail.com', 1, 'Людмила', 'samoylenko@gmail.com', 'Вікторівна', 'ROLE_DOCTOR', 'Самойленко', 8);
 
 -- Notes
 

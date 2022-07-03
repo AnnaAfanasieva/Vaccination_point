@@ -6,6 +6,7 @@ import ua.com.alevel.vaccination_point.facade.util.ConvertRequestDtoToEntity;
 import ua.com.alevel.vaccination_point.model.dto.request.NoteRequestDto;
 import ua.com.alevel.vaccination_point.model.dto.response.NoteResponseDto;
 import ua.com.alevel.vaccination_point.model.entity.item.Note;
+import ua.com.alevel.vaccination_point.model.entity.item.Vaccine;
 import ua.com.alevel.vaccination_point.service.item.NoteService;
 
 import java.sql.Timestamp;
@@ -57,6 +58,30 @@ public class NoteFacadeImpl implements NoteFacade {
             dtoList.add(new NoteResponseDto(note));
         }
 //        List<NoteResponseDto> dtoList = noteService.findAll().stream().map(NoteResponseDto::new).toList();
+        return dtoList;
+    }
+
+    @Override
+    public List<NoteResponseDto> findAllByVaccine(Vaccine vaccine) {
+        List<NoteResponseDto> dtoList = new ArrayList<>();
+        for (Note note : noteService.findAllByVaccine(vaccine)) {
+            dtoList.add(new NoteResponseDto(note));
+        }
+        return dtoList;
+    }
+
+    @Override
+    public NoteResponseDto findByIdAndVisible(Long id, boolean isVisible) {
+        return new NoteResponseDto(noteService.findByIdAndVisible(id, isVisible).get());
+    }
+
+    @Override
+    public List<NoteResponseDto> findAllByVisible(boolean isVisible) {
+        //TODO переробити з використанням stream api
+        List<NoteResponseDto> dtoList = new ArrayList<>();
+        for (Note note : noteService.findAllByVisible(isVisible)) {
+            dtoList.add(new NoteResponseDto(note));
+        }
         return dtoList;
     }
 }

@@ -58,4 +58,19 @@ public class VaccineFacadeImpl implements VaccineFacade {
         }
         return dtoList;
     }
+
+    @Override
+    public VaccineResponseDto findByIdAndVisible(Long id, boolean isVisible) {
+        return new VaccineResponseDto(vaccineService.findByIdAndVisible(id, isVisible).get());
+    }
+
+    @Override
+    public List<VaccineResponseDto> findAllByVisible(boolean isVisible) {
+        //TODO переробити з використанням stream api
+        List<VaccineResponseDto> dtoList = new ArrayList<>();
+        for (Vaccine vaccine : vaccineService.findAllByVisible(isVisible)) {
+            dtoList.add(new VaccineResponseDto(vaccine));
+        }
+        return dtoList;
+    }
 }

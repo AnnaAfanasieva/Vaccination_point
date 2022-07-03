@@ -6,7 +6,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.alevel.vaccination_point.dao.crud.CrudRepositoryHelper;
 import ua.com.alevel.vaccination_point.dao.repository.item.NoteRepository;
+import ua.com.alevel.vaccination_point.dao.repository.item.VaccineRepository;
 import ua.com.alevel.vaccination_point.model.entity.item.Note;
+import ua.com.alevel.vaccination_point.model.entity.item.Vaccine;
 import ua.com.alevel.vaccination_point.service.item.NoteService;
 
 import java.util.List;
@@ -17,10 +19,14 @@ public class NoteServiceImpl implements NoteService {
 
     private final NoteRepository noteRepository;
     private final CrudRepositoryHelper<Note, NoteRepository> crudRepositoryHelper;
+    private final VaccineRepository vaccineRepository;
 
-    public NoteServiceImpl(NoteRepository noteRepository, CrudRepositoryHelper<Note, NoteRepository> crudRepositoryHelper) {
+    public NoteServiceImpl(NoteRepository noteRepository,
+                           CrudRepositoryHelper<Note, NoteRepository> crudRepositoryHelper,
+                           VaccineRepository vaccineRepository) {
         this.noteRepository = noteRepository;
         this.crudRepositoryHelper = crudRepositoryHelper;
+        this.vaccineRepository = vaccineRepository;
     }
 
     @Override
@@ -51,5 +57,29 @@ public class NoteServiceImpl implements NoteService {
     @Transactional(readOnly = true)
     public List<Note> findAll() {
         return crudRepositoryHelper.findAll(noteRepository);
+    }
+
+    @Override
+    public List<Note> findAllByVaccine(Vaccine vaccine) {
+        Optional<Vaccine> optionalVaccine = vaccineRepository.findById(vaccine.getId());
+        if (optionalVaccine.isPresent()) {
+            return noteRepository.findAllByVaccine(vaccine);
+        } else {
+            throw new RuntimeException("Такого запису не існує");
+        }
+    }
+
+    @Override
+    public Optional<Note> findByIdAndVisible(Long id, boolean isVisible) {
+        if(noteRepository.existsById(id)) {
+            return noteRepository.findByIdAndVisible(id, isVisible);
+        } else {
+            throw new RuntimeException("Дана сутність не знайдена");
+        }
+    }
+
+    @Override
+    public List<Note> findAllByVisible(boolean isVisible) {
+        return noteRepository.findAllByVisible(isVisible);
     }
 }

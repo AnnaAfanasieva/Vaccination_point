@@ -53,8 +53,22 @@ public class VaccinationPointFacadeImpl implements VaccinationPointFacade {
     public List<VaccinationPointResponseDto> findAll() {
         //TODO переробити з використанням stream api
         List<VaccinationPointResponseDto> dtoList = new ArrayList<>();
-        List<VaccinationPoint> vaccinationPoints = vaccinationPointService.findAll();
-        for (VaccinationPoint vaccinationPoint : vaccinationPoints) {
+        for (VaccinationPoint vaccinationPoint : vaccinationPointService.findAll()) {
+            dtoList.add(new VaccinationPointResponseDto(vaccinationPoint));
+        }
+        return dtoList;
+    }
+
+    @Override
+    public VaccinationPointResponseDto findByIdAndVisible(Long id, boolean isVisible) {
+        return new VaccinationPointResponseDto(vaccinationPointService.findByIdAndVisible(id, isVisible).get());
+    }
+
+    @Override
+    public List<VaccinationPointResponseDto> findAllByVisible(boolean isVisible) {
+        //TODO переробити з використанням stream api
+        List<VaccinationPointResponseDto> dtoList = new ArrayList<>();
+        for (VaccinationPoint vaccinationPoint : vaccinationPointService.findAllByVisible(isVisible)) {
             dtoList.add(new VaccinationPointResponseDto(vaccinationPoint));
         }
         return dtoList;

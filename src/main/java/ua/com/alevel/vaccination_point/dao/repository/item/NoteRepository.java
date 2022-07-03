@@ -7,12 +7,20 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ua.com.alevel.vaccination_point.dao.repository.BaseRepository;
 import ua.com.alevel.vaccination_point.model.entity.item.Note;
+import ua.com.alevel.vaccination_point.model.entity.item.Vaccine;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface NoteRepository extends BaseRepository<Note> {
+
+    List<Note> findAllByVaccine (Vaccine vaccine);
+
+    Optional<Note> findByIdAndVisible(Long id, boolean isVisible);
+
+    List<Note> findAllByVisible (boolean isVisible);
 
 //    @Query("select r from Record r join Doctor d on r.doctor = d where d.vaccinationPoint = :vaccinationPoint")
 //    Page<Record> findAllByVaccinationPoint(@Param("vaccinationPoint") VaccinationPoint vaccinationPoint, Pageable pageable);
