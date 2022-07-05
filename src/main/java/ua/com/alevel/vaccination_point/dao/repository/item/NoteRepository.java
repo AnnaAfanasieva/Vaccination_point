@@ -18,8 +18,10 @@ public interface NoteRepository extends BaseRepository<Note> {
 
     List<Note> findAllByVaccine (Vaccine vaccine);
 
+    @Query("select n from Note n where n.id =:id and n.isVisible = :isVisible")
     Optional<Note> findByIdAndVisible(Long id, boolean isVisible);
 
+    @Query("select n from Note n where n.isVisible = :isVisible")
     List<Note> findAllByVisible (boolean isVisible);
 
 //    @Query("select r from Record r join Doctor d on r.doctor = d where d.vaccinationPoint = :vaccinationPoint")

@@ -13,6 +13,7 @@ public interface DoctorService extends UserService<Doctor> {
     Optional<Doctor> findByIdAndVisible(Long id, boolean isVisible);
 
     List<Doctor> findAllByVisible(boolean isVisible);
+
 //    DataTableResponse<Doctor> findAllByVaccinationPoint(DataTableRequest request, VaccinationPoint vaccinationPoint);
 
 }

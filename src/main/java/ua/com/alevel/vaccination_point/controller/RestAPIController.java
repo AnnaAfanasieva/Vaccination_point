@@ -6,6 +6,7 @@ import ua.com.alevel.vaccination_point.facade.item.NoteFacade;
 import ua.com.alevel.vaccination_point.facade.item.VaccinationPointFacade;
 import ua.com.alevel.vaccination_point.facade.item.VaccineFacade;
 import ua.com.alevel.vaccination_point.facade.user.DoctorFacade;
+import ua.com.alevel.vaccination_point.model.dto.request.VaccinationPointRequestDto;
 import ua.com.alevel.vaccination_point.model.dto.response.VaccineResponseDto;
 import ua.com.alevel.vaccination_point.model.entity.item.Vaccine;
 
@@ -74,5 +75,15 @@ public class RestAPIController {
         VaccineResponseDto vaccineDto = vaccineFacade.findById(id);
         Vaccine vaccine = new Vaccine(vaccineDto);
         return gson.toJson(noteFacade.findAllByVaccine(vaccine));
+    }
+
+    @GetMapping("/all/visible/vaccines")
+    public String findAllVisibleVaccine() {
+        return gson.toJson(vaccineFacade.findAllByVisible(true));
+    }
+
+    @PostMapping("/new/vaccinationPoint")
+    public void createVaccinationPoint(@RequestBody VaccinationPointRequestDto dto) {
+        vaccinationPointFacade.create(dto);
     }
 }

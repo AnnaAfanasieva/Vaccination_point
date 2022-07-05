@@ -5,34 +5,38 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.alevel.vaccination_point.dao.crud.CrudRepositoryHelper;
+import ua.com.alevel.vaccination_point.dao.repository.item.NoteRepository;
+import ua.com.alevel.vaccination_point.dao.repository.item.VaccinationPointRepository;
 import ua.com.alevel.vaccination_point.dao.repository.user.DoctorRepository;
 import ua.com.alevel.vaccination_point.model.entity.item.Note;
 import ua.com.alevel.vaccination_point.model.entity.item.VaccinationPoint;
 import ua.com.alevel.vaccination_point.model.entity.user.Doctor;
-import ua.com.alevel.vaccination_point.service.item.NoteService;
-import ua.com.alevel.vaccination_point.service.item.VaccinationPointService;
 import ua.com.alevel.vaccination_point.service.user.DoctorService;
+import ua.com.alevel.vaccination_point.service.util.CascadeDelete;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
 
     private final DoctorRepository doctorRepository;
-    private final CrudRepositoryHelper<Doctor, DoctorRepository> crudRepositoryHelper;
-    private final NoteService noteService;
-    private final VaccinationPointService vaccinationPointService;
+    private final CrudRepositoryHelper<Doctor, DoctorRepository> crudRepositoryHelperDoctor;
+    private final NoteRepository noteRepository;
+    private final CrudRepositoryHelper<Note, NoteRepository> crudRepositoryHelperNote;
+    private final VaccinationPointRepository vaccinationPointRepository;
+    private final CrudRepositoryHelper<VaccinationPoint, VaccinationPointRepository> crudRepositoryHelperVaccinationPoint;
 
     public DoctorServiceImpl(DoctorRepository doctorRepository,
-                             CrudRepositoryHelper<Doctor, DoctorRepository> crudRepositoryHelper,
-                             NoteService noteService,
-                             VaccinationPointService vaccinationPointService) {
+                             CrudRepositoryHelper<Doctor, DoctorRepository> crudRepositoryHelperDoctor,
+                             NoteRepository noteRepository,
+                             CrudRepositoryHelper<Note, NoteRepository> crudRepositoryHelperNote, VaccinationPointRepository vaccinationPointRepository, CrudRepositoryHelper<VaccinationPoint, VaccinationPointRepository> crudRepositoryHelperVaccinationPoint) {
         this.doctorRepository = doctorRepository;
-        this.crudRepositoryHelper = crudRepositoryHelper;
-        this.noteService = noteService;
-        this.vaccinationPointService = vaccinationPointService;
+        this.crudRepositoryHelperDoctor = crudRepositoryHelperDoctor;
+        this.noteRepository = noteRepository;
+        this.crudRepositoryHelperNote = crudRepositoryHelperNote;
+        this.vaccinationPointRepository = vaccinationPointRepository;
+        this.crudRepositoryHelperVaccinationPoint = crudRepositoryHelperVaccinationPoint;
     }
 
     @Override
@@ -41,25 +45,26 @@ public class DoctorServiceImpl implements DoctorService {
         if (doctorRepository.existsByEmail(entity.getEmail())) {
             throw new RuntimeException("Користувач с такою поштою вже зареєстрований в системі");
         }
-        crudRepositoryHelper.create(doctorRepository, entity);
+        crudRepositoryHelperDoctor.create(doctorRepository, entity);
     }
 
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void update(Doctor entity) {
-        crudRepositoryHelper.update(doctorRepository, entity);
+        crudRepositoryHelperDoctor.update(doctorRepository, entity);
     }
 
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(Long id) {
-        Optional<Doctor> doctor = crudRepositoryHelper.findById(doctorRepository, id);
+        Optional<Doctor> doctor = crudRepositoryHelperDoctor.findById(doctorRepository, id);
         if (doctor.isPresent()) {
-            Set<Note> notes = doctor.get().getNotes();
-            for (Note note : notes) {
-                noteService.delete(note.getId());
-            }
-            crudRepositoryHelper.delete(doctorRepository, id);
+            CascadeDelete.deleteAllNotesByDoctor(doctor.get(), crudRepositoryHelperNote, noteRepository);
+//            Set<Note> notes = doctor.get().getNotes();
+//            for (Note note : notes) {
+//                crudRepositoryHelperNote.delete(noteRepository, note.getId());
+//            }
+            crudRepositoryHelperDoctor.delete(doctorRepository, id);
         } else {
             throw new RuntimeException("Запис для видалення відсутній");
         }
@@ -68,18 +73,19 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     @Transactional(readOnly = true)
     public Optional<Doctor> findById(Long id) {
-        return crudRepositoryHelper.findById(doctorRepository, id);
+        return crudRepositoryHelperDoctor.findById(doctorRepository, id);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Doctor> findAll() {
-        return crudRepositoryHelper.findAll(doctorRepository);
+        return crudRepositoryHelperDoctor.findAll(doctorRepository);
     }
 
     @Override
     public List<Doctor> findAllByVaccinationPoint(VaccinationPoint vaccinationPoint) {
-        Optional<VaccinationPoint> optionalVaccinationPoint = vaccinationPointService.findById(vaccinationPoint.getId());
+        Optional<VaccinationPoint> optionalVaccinationPoint =
+                crudRepositoryHelperVaccinationPoint.findById(vaccinationPointRepository, vaccinationPoint.getId());
         if (optionalVaccinationPoint.isPresent()) {
             return doctorRepository.findAllByVaccinationPoint(vaccinationPoint);
         } else {
