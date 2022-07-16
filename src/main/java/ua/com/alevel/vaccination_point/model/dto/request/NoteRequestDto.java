@@ -18,7 +18,7 @@ public class NoteRequestDto extends RequestDto {
     private String patronymic;
     private String phone;
     private Date dateOfBirth;
-    private Vaccine vaccine;
+    private Long vaccineId;
     private Date vaccineDate;
-    private Doctor doctor;
+    private Long doctorId;
 }

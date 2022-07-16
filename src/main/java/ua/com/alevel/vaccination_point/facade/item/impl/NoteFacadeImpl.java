@@ -7,7 +7,10 @@ import ua.com.alevel.vaccination_point.model.dto.request.NoteRequestDto;
 import ua.com.alevel.vaccination_point.model.dto.response.NoteResponseDto;
 import ua.com.alevel.vaccination_point.model.entity.item.Note;
 import ua.com.alevel.vaccination_point.model.entity.item.Vaccine;
+import ua.com.alevel.vaccination_point.model.entity.user.Doctor;
 import ua.com.alevel.vaccination_point.service.item.NoteService;
+import ua.com.alevel.vaccination_point.service.item.VaccineService;
+import ua.com.alevel.vaccination_point.service.user.DoctorService;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -18,25 +21,40 @@ import java.util.Optional;
 public class NoteFacadeImpl implements NoteFacade {
 
     private final NoteService noteService;
+    private final DoctorService doctorService;
+    private final VaccineService vaccineService;
 
-    public NoteFacadeImpl(NoteService noteService) {
+    public NoteFacadeImpl(NoteService noteService, DoctorService doctorService, VaccineService vaccineService) {
         this.noteService = noteService;
+        this.doctorService = doctorService;
+        this.vaccineService = vaccineService;
     }
 
     @Override
     public void create(NoteRequestDto noteRequestDto) {
-        Note note = ConvertRequestDtoToEntity.createNoteEntity(noteRequestDto, new Note());
-        noteService.create(note);
+        Optional<Doctor> doctor = doctorService.findByIdAndVisible(noteRequestDto.getDoctorId(), true);
+        Optional<Vaccine> vaccine = vaccineService.findByIdAndVisible(noteRequestDto.getVaccineId(), true);
+        if (doctor.isPresent() && vaccine.isPresent()) {
+            Note note = ConvertRequestDtoToEntity.createNoteEntity(noteRequestDto, new Note(), doctor.get(), vaccine.get());
+            noteService.create(note);
+        } else {
+            throw new RuntimeException("Запис відсутній");
+        }
+
     }
 
     @Override
     public void update(NoteRequestDto noteRequestDto, Long id) {
         Optional<Note> optionalNote = noteService.findById(id);
-        if (optionalNote.isPresent()) {
+        Optional<Doctor> doctor = doctorService.findByIdAndVisible(noteRequestDto.getDoctorId(), true);
+        Optional<Vaccine> vaccine = vaccineService.findByIdAndVisible(noteRequestDto.getVaccineId(), true);
+        if (optionalNote.isPresent() && doctor.isPresent() && vaccine.isPresent()) {
             Note note = optionalNote.get();
             note.setUpdated(new Timestamp(System.currentTimeMillis()));
-            ConvertRequestDtoToEntity.createNoteEntity(noteRequestDto, note);
+            ConvertRequestDtoToEntity.createNoteEntity(noteRequestDto, note, doctor.get(), vaccine.get());
             noteService.update(note);
+        } else {
+            throw new RuntimeException("Запис відсутній");
         }
     }
 

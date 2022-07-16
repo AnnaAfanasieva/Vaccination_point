@@ -1,5 +1,6 @@
 package ua.com.alevel.vaccination_point.facade.user.impl;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.com.alevel.vaccination_point.facade.user.DoctorFacade;
 import ua.com.alevel.vaccination_point.facade.util.ConvertRequestDtoToEntity;
@@ -7,6 +8,7 @@ import ua.com.alevel.vaccination_point.model.dto.request.DoctorRequestDto;
 import ua.com.alevel.vaccination_point.model.dto.response.DoctorResponseDto;
 import ua.com.alevel.vaccination_point.model.entity.item.VaccinationPoint;
 import ua.com.alevel.vaccination_point.model.entity.user.Doctor;
+import ua.com.alevel.vaccination_point.service.item.VaccinationPointService;
 import ua.com.alevel.vaccination_point.service.user.DoctorService;
 
 import java.sql.Timestamp;
@@ -18,25 +20,38 @@ import java.util.Optional;
 public class DoctorFacadeImpl implements DoctorFacade {
 
     private final DoctorService doctorService;
+    private final VaccinationPointService vaccinationPointService;
+    private final BCryptPasswordEncoder encoder;
 
-    public DoctorFacadeImpl(DoctorService doctorService) {
+    public DoctorFacadeImpl(DoctorService doctorService, VaccinationPointService vaccinationPointService, BCryptPasswordEncoder encoder) {
         this.doctorService = doctorService;
+        this.vaccinationPointService = vaccinationPointService;
+        this.encoder = encoder;
     }
 
     @Override
     public void create(DoctorRequestDto doctorRequestDto) {
-        Doctor doctor = ConvertRequestDtoToEntity.createDoctorEntity(doctorRequestDto, new Doctor());
-        doctorService.create(doctor);
+        Optional<VaccinationPoint> vaccinationPoint = vaccinationPointService.findByIdAndVisible(doctorRequestDto.getVaccinationPointId(), true);
+        if (vaccinationPoint.isPresent()) {
+            Doctor doctor = ConvertRequestDtoToEntity.createDoctorEntity(doctorRequestDto, new Doctor(), vaccinationPoint.get());
+            doctor.setPassword(encoder.encode(doctor.getPassword()));
+            doctorService.create(doctor);
+        } else {
+            throw new RuntimeException("Пункт вакцинації відсутній");
+        }
     }
 
     @Override
     public void update(DoctorRequestDto doctorRequestDto, Long id) {
         Optional<Doctor> optionalDoctor = doctorService.findById(id);
-        if (optionalDoctor.isPresent()) {
+        Optional<VaccinationPoint> vaccinationPoint = vaccinationPointService.findByIdAndVisible(doctorRequestDto.getVaccinationPointId(), true);
+        if (optionalDoctor.isPresent() && vaccinationPoint.isPresent()) {
             Doctor doctor = optionalDoctor.get();
             doctor.setUpdated(new Timestamp(System.currentTimeMillis()));
-            ConvertRequestDtoToEntity.createDoctorEntity(doctorRequestDto, doctor);
+            ConvertRequestDtoToEntity.createDoctorEntity(doctorRequestDto, doctor, vaccinationPoint.get());
             doctorService.update(doctor);
+        } else {
+            throw new RuntimeException("Запис відсутній");
         }
     }
 

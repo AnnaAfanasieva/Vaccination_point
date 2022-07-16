@@ -15,15 +15,15 @@ public final class ConvertRequestDtoToEntity {
 
     }
 
-    public static Note createNoteEntity(NoteRequestDto dto, Note note) {
+    public static Note createNoteEntity(NoteRequestDto dto, Note note, Doctor doctor, Vaccine vaccine) {
         note.setSurname(dto.getSurname());
         note.setName(dto.getName());
         note.setPatronymic(dto.getPatronymic());
         note.setPhone(dto.getPhone());
         note.setDateOfBirth(dto.getDateOfBirth());
-        note.setVaccine(dto.getVaccine());
+        note.setVaccine(vaccine);
         note.setVaccineDate(dto.getVaccineDate());
-        note.setDoctor(dto.getDoctor());
+        note.setDoctor(doctor);
         return note;
     }
 
@@ -38,11 +38,13 @@ public final class ConvertRequestDtoToEntity {
         return vaccine;
     }
 
-    public static Doctor createDoctorEntity(DoctorRequestDto dto, Doctor doctor) {
+    public static Doctor createDoctorEntity(DoctorRequestDto dto, Doctor doctor, VaccinationPoint vaccinationPoint) {
         doctor.setSurname(dto.getSurname());
         doctor.setName(dto.getName());
         doctor.setPatronymic(dto.getPatronymic());
-        doctor.setVaccinationPoint(dto.getVaccinationPoint());
+        doctor.setEmail(dto.getEmail());
+        doctor.setPassword(dto.getPassword());
+        doctor.setVaccinationPoint(vaccinationPoint);
         doctor.setNotes(dto.getNotes());
         return doctor;
     }

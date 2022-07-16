@@ -16,6 +16,8 @@ public class DoctorRequestDto extends RequestDto {
     private String surname;
     private String name;
     private String patronymic;
-    private VaccinationPoint vaccinationPoint;
+    private String email;
+    private String password;
+    private Long vaccinationPointId;
     private Set<Note> notes;
 }
