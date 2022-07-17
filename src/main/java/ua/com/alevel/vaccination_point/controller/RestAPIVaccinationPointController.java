@@ -31,9 +31,19 @@ public class RestAPIVaccinationPointController {
         vaccinationPointFacade.delete(id);
     }
 
-    //TODO find by id
-    public String findByIdVaccinationPoint() {
-        return null;
+    @GetMapping("/details/{id}")
+    public String findByIdVaccinationPoint(@PathVariable("id") Long id) {
+        return gson.toJson(vaccinationPointFacade.findById(id));
+    }
+
+    @GetMapping("/details/visible/{id}")
+    public String findByIdVisibleVaccinationPoint(@PathVariable("id") Long id) {
+        return gson.toJson(vaccinationPointFacade.findByIdAndVisible(id, true));
+    }
+
+    @GetMapping("/details/invisible/{id}")
+    public String findByIdInvisibleVaccinationPoint(@PathVariable("id") Long id) {
+        return gson.toJson(vaccinationPointFacade.findByIdAndVisible(id, false));
     }
 
     @GetMapping("/all")

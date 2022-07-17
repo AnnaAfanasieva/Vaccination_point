@@ -36,9 +36,19 @@ public class RestAPINoteController {
         noteFacade.delete(id);
     }
 
-    //TODO find by id
-    public String findByIdNote() {
-        return null;
+    @GetMapping("/details/{id}")
+    public String findByIdNote(@PathVariable("id") Long id) {
+        return gson.toJson(noteFacade.findById(id));
+    }
+
+    @GetMapping("/details/visible/{id}")
+    public String findByIdVisibleNote(@PathVariable("id") Long id) {
+        return gson.toJson(noteFacade.findByIdAndVisible(id, true));
+    }
+
+    @GetMapping("/details/invisible/{id}")
+    public String findByIdInvisibleNote(@PathVariable("id") Long id) {
+        return gson.toJson(noteFacade.findByIdAndVisible(id, false));
     }
 
     @GetMapping("/all")

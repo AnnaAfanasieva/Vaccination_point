@@ -31,9 +31,19 @@ public class RestAPIDoctorController {
         doctorFacade.delete(id);
     }
 
-    //TODO find by id
-    public String findByIdDoctor() {
-        return null;
+    @GetMapping("/details/{id}")
+    public String findByIdDoctor(@PathVariable("id") Long id) {
+        return gson.toJson(doctorFacade.findById(id));
+    }
+
+    @GetMapping("/details/visible/{id}")
+    public String findByIdVisibleDoctor(@PathVariable("id") Long id) {
+        return gson.toJson(doctorFacade.findByIdAndVisible(id, true));
+    }
+
+    @GetMapping("/details/invisible/{id}")
+    public String findByIdInvisibleDoctor(@PathVariable("id") Long id) {
+        return gson.toJson(doctorFacade.findByIdAndVisible(id, false));
     }
 
     @GetMapping("/all")
