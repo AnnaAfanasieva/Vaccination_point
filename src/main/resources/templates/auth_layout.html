@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Auth Layout</title>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+
+    <div sec:authorize="hasRole('MAIN_ADMIN')">
+        <nav>
+            <a class="nav-item nav-link" th:href="@{/admin/dashboard}">Головна</a>
+            <a class="nav-item nav-link" th:href="@{/admin/records}">Записи</a>
+            <a class="nav-item nav-link" th:href="@{/admin/doctors}">Лікарі</a>
+            <a class="nav-item nav-link" th:href="@{/admin/vaccination_points}">Пункти вакцинації</a>
+            <a class="nav-item nav-link" th:href="@{/admin/records/deleted}">Відмінені записи</a>
+<!--            <a class="nav-item nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer !important;">Вийти</a>-->
+        </nav>
+    </div>
+
+    <div sec:authorize="hasRole('POINT_ADMIN')">
+        <nav>
+            <a class="nav-item nav-link" th:href="@{/admin/dashboard}">Головна</a>
+            <a class="nav-item nav-link" th:href="@{/admin/records}">Записи</a>
+            <a class="nav-item nav-link" th:href="@{/admin/doctors}">Лікарі</a>
+            <a class="nav-item nav-link" th:href="@{/admin/vaccination_points}">Пункти вакцинації</a>
+            <a class="nav-item nav-link" th:href="@{/admin/records/deleted}">Відмінені записи</a>
+            <!--            <a class="nav-item nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer !important;">Вийти</a>-->
+        </nav>
+    </div>
+
+    <div sec:authorize="hasRole('DOCTOR')">
+        <nav>
+            <a class="nav-item nav-link" th:href="@{/doctor/dashboard}">Головна</a>
+            <a class="nav-item nav-link" th:href="@{/doctor/records}">Записи</a>
+<!--            <a class="nav-item nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer !important;">Вийти</a>-->
+        </nav>
+    </div>
+
+</div>
+</body>
+</html>
