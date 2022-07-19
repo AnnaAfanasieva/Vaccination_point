@@ -1,4 +1,4 @@
-package ua.com.alevel.vaccination_point.controller;
+package ua.com.alevel.vaccination_point.controller.restAPI;
 
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.*;
