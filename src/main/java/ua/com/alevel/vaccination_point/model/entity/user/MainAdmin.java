@@ -13,4 +13,14 @@ public class MainAdmin extends User {
         super();
         setRoleType(RoleType.ROLE_MAIN_ADMIN);
     }
+
+    public MainAdmin(User user) {
+        super();
+        setSurname(user.getSurname());
+        setName(user.getName());
+        setPatronymic(user.getPatronymic());
+        setEmail(user.getEmail());
+        setPassword(user.getPassword());
+        setRoleType(RoleType.ROLE_MAIN_ADMIN);
+    }
 }

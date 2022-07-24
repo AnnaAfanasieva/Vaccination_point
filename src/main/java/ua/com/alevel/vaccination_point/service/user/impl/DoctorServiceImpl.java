@@ -1,5 +1,6 @@
 package ua.com.alevel.vaccination_point.service.user.impl;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -26,17 +27,19 @@ public class DoctorServiceImpl implements DoctorService {
     private final CrudRepositoryHelper<Note, NoteRepository> crudRepositoryHelperNote;
     private final VaccinationPointRepository vaccinationPointRepository;
     private final CrudRepositoryHelper<VaccinationPoint, VaccinationPointRepository> crudRepositoryHelperVaccinationPoint;
+    private final BCryptPasswordEncoder encoder;
 
     public DoctorServiceImpl(DoctorRepository doctorRepository,
                              CrudRepositoryHelper<Doctor, DoctorRepository> crudRepositoryHelperDoctor,
                              NoteRepository noteRepository,
-                             CrudRepositoryHelper<Note, NoteRepository> crudRepositoryHelperNote, VaccinationPointRepository vaccinationPointRepository, CrudRepositoryHelper<VaccinationPoint, VaccinationPointRepository> crudRepositoryHelperVaccinationPoint) {
+                             CrudRepositoryHelper<Note, NoteRepository> crudRepositoryHelperNote, VaccinationPointRepository vaccinationPointRepository, CrudRepositoryHelper<VaccinationPoint, VaccinationPointRepository> crudRepositoryHelperVaccinationPoint, BCryptPasswordEncoder encoder) {
         this.doctorRepository = doctorRepository;
         this.crudRepositoryHelperDoctor = crudRepositoryHelperDoctor;
         this.noteRepository = noteRepository;
         this.crudRepositoryHelperNote = crudRepositoryHelperNote;
         this.vaccinationPointRepository = vaccinationPointRepository;
         this.crudRepositoryHelperVaccinationPoint = crudRepositoryHelperVaccinationPoint;
+        this.encoder = encoder;
     }
 
     @Override
@@ -45,6 +48,7 @@ public class DoctorServiceImpl implements DoctorService {
         if (doctorRepository.existsByEmail(entity.getEmail())) {
             throw new RuntimeException("Користувач с такою поштою вже зареєстрований в системі");
         }
+        entity.setPassword(encoder.encode(entity.getPassword()));
         crudRepositoryHelperDoctor.create(doctorRepository, entity);
     }
 

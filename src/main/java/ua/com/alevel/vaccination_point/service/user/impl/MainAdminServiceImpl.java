@@ -1,5 +1,6 @@
 package ua.com.alevel.vaccination_point.service.user.impl;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,10 +18,12 @@ public class MainAdminServiceImpl implements MainAdminService {
 
     private final MainAdminRepository mainAdminRepository;
     private final CrudRepositoryHelper<MainAdmin, MainAdminRepository> crudRepositoryHelper;
+    private final BCryptPasswordEncoder encoder;
 
-    public MainAdminServiceImpl(MainAdminRepository mainAdminRepository, CrudRepositoryHelper<MainAdmin, MainAdminRepository> crudRepositoryHelper) {
+    public MainAdminServiceImpl(MainAdminRepository mainAdminRepository, CrudRepositoryHelper<MainAdmin, MainAdminRepository> crudRepositoryHelper, BCryptPasswordEncoder encoder) {
         this.mainAdminRepository = mainAdminRepository;
         this.crudRepositoryHelper = crudRepositoryHelper;
+        this.encoder = encoder;
     }
 
     @Override
@@ -29,6 +32,7 @@ public class MainAdminServiceImpl implements MainAdminService {
         if (mainAdminRepository.existsByEmail(entity.getEmail())) {
             throw new RuntimeException("Користувач с такою поштою вже зареєстрований в системі");
         }
+        entity.setPassword(encoder.encode(entity.getPassword()));
         crudRepositoryHelper.create(mainAdminRepository, entity);
     }
 

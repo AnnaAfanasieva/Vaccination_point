@@ -15,4 +15,5 @@ public class AuthDto {
     private RoleType roleType;
     private String email;
     private String password;
+    private Long vaccinationPointId;
 }

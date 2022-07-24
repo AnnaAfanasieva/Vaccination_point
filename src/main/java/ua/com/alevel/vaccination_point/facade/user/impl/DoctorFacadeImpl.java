@@ -21,12 +21,11 @@ public class DoctorFacadeImpl implements DoctorFacade {
 
     private final DoctorService doctorService;
     private final VaccinationPointService vaccinationPointService;
-    private final BCryptPasswordEncoder encoder;
 
-    public DoctorFacadeImpl(DoctorService doctorService, VaccinationPointService vaccinationPointService, BCryptPasswordEncoder encoder) {
+    public DoctorFacadeImpl(DoctorService doctorService,
+                            VaccinationPointService vaccinationPointService) {
         this.doctorService = doctorService;
         this.vaccinationPointService = vaccinationPointService;
-        this.encoder = encoder;
     }
 
     @Override
@@ -34,7 +33,6 @@ public class DoctorFacadeImpl implements DoctorFacade {
         Optional<VaccinationPoint> vaccinationPoint = vaccinationPointService.findByIdAndVisible(doctorRequestDto.getVaccinationPointId(), true);
         if (vaccinationPoint.isPresent()) {
             Doctor doctor = ConvertRequestDtoToEntity.createDoctorEntity(doctorRequestDto, new Doctor(), vaccinationPoint.get());
-            doctor.setPassword(encoder.encode(doctor.getPassword()));
             doctorService.create(doctor);
         } else {
             throw new RuntimeException("Пункт вакцинації відсутній");
