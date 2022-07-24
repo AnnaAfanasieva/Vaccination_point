@@ -3,21 +3,18 @@ package ua.com.alevel.vaccination_point.model.dto.request;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ua.com.alevel.vaccination_point.model.entity.item.Note;
-import ua.com.alevel.vaccination_point.model.entity.item.VaccinationPoint;
-
-import java.util.Set;
+import ua.com.alevel.vaccination_point.model.util.RoleType;
 
 @Getter
 @Setter
-
-public class DoctorRequestDto extends RequestDto {
+@ToString
+public class PointAdminRequestDto extends RequestDto {
 
     private String surname;
     private String name;
     private String patronymic;
+    private RoleType roleType;
     private String email;
     private String password;
     private Long vaccinationPointId;
-    private Set<Note> notes;
 }

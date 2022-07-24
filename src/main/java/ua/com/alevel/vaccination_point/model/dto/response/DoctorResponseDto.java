@@ -16,6 +16,7 @@ public class DoctorResponseDto extends ResponseDto {
     private String surname;
     private String name;
     private String patronymic;
+    private String email;
     private Long vaccinationPointId;
 //    private Set<Note> notes;
 
@@ -31,6 +32,7 @@ public class DoctorResponseDto extends ResponseDto {
         this.surname = doctor.getSurname();
         this.name = doctor.getName();
         this.patronymic = doctor.getPatronymic();
+        this.email = doctor.getEmail();
         this.vaccinationPointId = doctor.getVaccinationPoint().getId();
 //        this.notes = doctor.getNotes();
     }
