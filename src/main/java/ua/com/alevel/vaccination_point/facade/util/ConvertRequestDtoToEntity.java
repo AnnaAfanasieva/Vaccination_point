@@ -1,13 +1,13 @@
 package ua.com.alevel.vaccination_point.facade.util;
 
-import ua.com.alevel.vaccination_point.model.dto.request.DoctorRequestDto;
-import ua.com.alevel.vaccination_point.model.dto.request.NoteRequestDto;
-import ua.com.alevel.vaccination_point.model.dto.request.VaccinationPointRequestDto;
-import ua.com.alevel.vaccination_point.model.dto.request.VaccineRequestDto;
+import ua.com.alevel.vaccination_point.model.dto.request.*;
 import ua.com.alevel.vaccination_point.model.entity.item.Note;
 import ua.com.alevel.vaccination_point.model.entity.item.VaccinationPoint;
 import ua.com.alevel.vaccination_point.model.entity.item.Vaccine;
 import ua.com.alevel.vaccination_point.model.entity.user.Doctor;
+import ua.com.alevel.vaccination_point.model.entity.user.MainAdmin;
+import ua.com.alevel.vaccination_point.model.entity.user.PointAdmin;
+import ua.com.alevel.vaccination_point.model.entity.user.User;
 
 public final class ConvertRequestDtoToEntity {
 
@@ -47,5 +47,28 @@ public final class ConvertRequestDtoToEntity {
         doctor.setVaccinationPoint(vaccinationPoint);
         doctor.setNotes(dto.getNotes());
         return doctor;
+    }
+
+    public static MainAdmin createMainAdminEntity(MainAdminRequestDto dto, MainAdmin mainAdmin) {
+        mainAdmin.setSurname(dto.getSurname());
+        mainAdmin.setName(dto.getName());
+        mainAdmin.setPatronymic(dto.getPatronymic());
+        mainAdmin.setRoleType(dto.getRoleType());
+        mainAdmin.setEmail(dto.getEmail());
+        mainAdmin.setPassword(dto.getPassword());
+        return mainAdmin;
+    }
+
+    public static PointAdmin createPointAdminEntity(PointAdminRequestDto dto,
+                                                    PointAdmin pointAdmin,
+                                                    VaccinationPoint vaccinationPoint) {
+        pointAdmin.setSurname(dto.getSurname());
+        pointAdmin.setName(dto.getName());
+        pointAdmin.setPatronymic(dto.getPatronymic());
+        pointAdmin.setRoleType(dto.getRoleType());
+        pointAdmin.setEmail(dto.getEmail());
+        pointAdmin.setPassword(dto.getPassword());
+        pointAdmin.setVaccinationPoint(vaccinationPoint);
+        return pointAdmin;
     }
 }
