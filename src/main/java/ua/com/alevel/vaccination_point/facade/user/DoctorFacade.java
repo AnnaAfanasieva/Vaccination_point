@@ -14,4 +14,6 @@ public interface DoctorFacade extends BaseFacade<DoctorRequestDto, DoctorRespons
     DoctorResponseDto findByIdAndVisible(Long id, boolean isVisible);
 
     List<DoctorResponseDto> findAllByVisible(boolean isVisible);
+
+    List<DoctorResponseDto> findAllByVaccinationPointAndVisible(VaccinationPoint vaccinationPoint, boolean isVisible);
 }

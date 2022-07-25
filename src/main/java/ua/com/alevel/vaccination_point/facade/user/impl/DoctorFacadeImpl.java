@@ -96,4 +96,16 @@ public class DoctorFacadeImpl implements DoctorFacade {
         }
         return dtoList;
     }
+
+    @Override
+    public List<DoctorResponseDto> findAllByVaccinationPointAndVisible(
+            VaccinationPoint vaccinationPoint,
+            boolean isVisible) {
+        List<DoctorResponseDto> dtoList = new ArrayList<>();
+        for (Doctor doctor : doctorService.
+                findAllByVaccinationPointAndVisible(vaccinationPoint, isVisible)) {
+            dtoList.add(new DoctorResponseDto(doctor));
+        }
+        return dtoList;
+    }
 }

@@ -21,6 +21,9 @@ public interface DoctorRepository extends UserRepository<Doctor> {
     @Query("select d from Doctor d where d.isVisible = :isVisible")
     List<Doctor> findAllByVisible(boolean isVisible);
 
+    @Query("select d from Doctor d where d.vaccinationPoint = :vaccinationPoint and d.isVisible = :isVisible")
+    List<Doctor> findAllByVaccinationPointAndVisible(VaccinationPoint vaccinationPoint, boolean isVisible);
+
 //    Page<Doctor> findAllByVaccinationPoint(VaccinationPoint vaccinationPoint, Pageable pageable);
 //
 //    @Query("")

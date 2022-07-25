@@ -110,4 +110,15 @@ public class DoctorServiceImpl implements DoctorService {
     public List<Doctor> findAllByVisible(boolean isVisible) {
         return doctorRepository.findAllByVisible(isVisible);
     }
+
+    @Override
+    public List<Doctor> findAllByVaccinationPointAndVisible(VaccinationPoint vaccinationPoint, boolean isVisible) {
+        Optional<VaccinationPoint> optionalVaccinationPoint =
+                crudRepositoryHelperVaccinationPoint.findById(vaccinationPointRepository, vaccinationPoint.getId());
+        if (optionalVaccinationPoint.isPresent()) {
+            return doctorRepository.findAllByVaccinationPointAndVisible(vaccinationPoint, isVisible);
+        } else {
+            throw new RuntimeException("Такого запису не існує");
+        }
+    }
 }

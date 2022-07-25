@@ -14,6 +14,8 @@ public interface DoctorService extends UserService<Doctor> {
 
     List<Doctor> findAllByVisible(boolean isVisible);
 
+    List<Doctor> findAllByVaccinationPointAndVisible(VaccinationPoint vaccinationPoint, boolean isVisible);
+
 //    DataTableResponse<Doctor> findAllByVaccinationPoint(DataTableRequest request, VaccinationPoint vaccinationPoint);
 
 }
